@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'file:///E:/Alaa%20Alaraby/Meal_Monkey/lib/Screens/splash_screen.dart';
-
+import 'Screens/splash_screen.dart';
+import 'app_colors.dart';
 import 'localization/language_constants.dart';
 import 'localization/localization.dart';
 
@@ -10,16 +10,14 @@ void main() {
   runApp(MyApp());
 }
 
-
-
 class MyApp extends StatefulWidget {
-
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = Locale("ar", "SA");
+
   setLocale(Locale locale) {
     setState(() {
       _locale = locale;
@@ -38,8 +36,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    //statusBarColor: AppColors.transparent));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+    //     statusBarColor: AppColors.transparent));
     return MaterialApp(
       locale: _locale,
       supportedLocales: [
