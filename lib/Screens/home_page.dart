@@ -19,14 +19,22 @@ class _HomePageState extends State<HomePage> {
         body: Stack(children: [
       PositionedDirectional(
         width: _width,
-        height: _height * 0.59,
+        height: _height * 0.53,
         child: SvgPicture.asset(
-          'assets/Orange_top_shape.svg',
+          'assets/Shaped_subtraction.svg',
           fit: BoxFit.cover,
         ),
       ),
+//      PositionedDirectional(
+//        width: _width,
+//        height: _height * 0.59,
+//        child: SvgPicture.asset(
+//          'assets/Background_objects.svg',
+//          fit: BoxFit.cover,
+//        ),
+//      ),
       PositionedDirectional(
-        top: 0.4 * _height,
+        top: 0.42 * _height,
         start: 0.4 * _width,
         child: SvgPicture.asset(
           "assets/Monkey_face.svg",
@@ -35,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       PositionedDirectional(
-          top: 0.55 * _height,
+          top: 0.57 * _height,
           start: 0.25 * _width,
           child: Text(
             "Meal",
@@ -43,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 fontFamily: "Cabin", fontSize: 34, color: AppColors.orange),
           )),
       PositionedDirectional(
-          top: 0.55 * _height,
+          top: 0.57 * _height,
           start: 0.45 * _width,
           child: Text(
             "Monkey",
@@ -51,8 +59,8 @@ class _HomePageState extends State<HomePage> {
                 fontFamily: "Cabin", fontSize: 34, color: AppColors.darkGrey),
           )),
       PositionedDirectional(
-          top: 0.61 * _height,
-          start: 0.4 * _width,
+          top: 0.64 * _height,
+          start: 0.38 * _width,
           child: Text(
             "Food delivery".toUpperCase(),
             style: TextStyle(
@@ -62,29 +70,40 @@ class _HomePageState extends State<HomePage> {
                 color: AppColors.darkGrey),
           )),
       PositionedDirectional(
-          top: 0.68 * _height,
+          top: 0.7 * _height,
           start: 0.1 * _width,
-          child: Text(
-            getTranslated(context, "discover"),
-            style: TextStyle(
-                fontFamily: "Metropolis",
-                fontWeight: FontWeight.w400,
-                fontSize: 13,
-                color: AppColors.darkGrey),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              getTranslated(context, "discover"),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: "Metropolis",
+                  fontWeight: FontWeight.w400,
+                  fontSize: 13,
+                  color: AppColors.darkGrey),
+            ),
           )),
       PositionedDirectional(
-        top: 0.75 * _height,
-        start: 0.4 * _width,
+        top: 0.79 * _height,
+        start: 0.1 * _width,
         child: Container(
-          width: 100,
-          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(28)), color: AppColors.orange),
-          child: Text(
-            getTranslated(context, "login"),
-            style: TextStyle(
-                fontFamily: "Metropolis",
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-                color: AppColors.white),
+          width: _width * 0.8,
+          height: _height * 0.07,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(28)),
+              color: AppColors.orange),
+          child: Padding(
+            padding: const EdgeInsets.only(top:15.0),
+            child: Text(
+              getTranslated(context, "login"),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: "Metropolis",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: AppColors.white),
+            ),
           ),
         ),
       )
