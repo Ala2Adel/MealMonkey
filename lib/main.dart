@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'Screens/splash_screen.dart';
-import 'app_colors.dart';
 import 'localization/language_constants.dart';
 import 'localization/localization.dart';
 
