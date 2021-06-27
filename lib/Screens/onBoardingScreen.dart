@@ -7,6 +7,8 @@ import 'package:meal_monkey/Screens/welcome_page.dart';
 import 'package:meal_monkey/app_colors.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
+import 'home_page.dart';
+
 class OnBoardingPage extends StatefulWidget {
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
@@ -119,6 +121,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     style: TextStyle(
                         height: 1.3,
                         fontSize: 13.0,
+                        color: AppColors.darkGrey,
                         fontFamily: "Metropolis",
                         fontWeight: FontWeight.w400),
                   ),
@@ -129,11 +132,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => WelcomePage()));
+                                builder: (context) => HomePage()));
                       }
 
                       _pageController.nextPage(
-                        duration: Duration(milliseconds: 200),
+                        duration: Duration(milliseconds: 300),
                         curve: Curves.fastLinearToSlowEaseIn,
                       );
                     },
