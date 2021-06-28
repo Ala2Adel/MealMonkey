@@ -28,5 +28,8 @@
   "fast_delivery": "توصيل سريع",
   "fast_food": "Fast food delivery to your home, office wherever you are",
   "live_tracking": "Live Tracking",
-  "real_time_track": "Real time tracking of your food on the app once you placed the order"
+  "real_time_track": "Real time tracking of your food on the app once you placed the order",
+  "delivery_to": "توصيل إلى",
+  "current_loc": "الموقع الحالي",
+  "search": "Search food"
 }

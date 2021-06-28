@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:meal_monkey/Screens/home_page.dart';
 import 'package:meal_monkey/app_colors.dart';
 import 'welcome_page.dart';
 
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 4),
         () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (BuildContext context) => WelcomePage(),
+                builder: (BuildContext context) => HomePage(),
               ),
             ));
     super.didChangeDependencies();
