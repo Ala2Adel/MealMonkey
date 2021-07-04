@@ -31,5 +31,7 @@
   "real_time_track": "Real time tracking of your food on the app once you placed the order",
   "delivery_to": "توصيل إلى",
   "current_loc": "الموقع الحالي",
-  "search": "Search food"
+  "search": "ابحث عن الطعام",
+  "pop_rest": "المطاعم المشهورة",
+  "view_all": "اعرض الكل"
 }
