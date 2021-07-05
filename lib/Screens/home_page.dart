@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:meal_monkey/Widgets/restaurants_card.dart';
+import 'package:meal_monkey/Widgets/most_popular.dart';
+import 'package:meal_monkey/Widgets/pop_restaurants.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
 import '../app_colors.dart';
@@ -213,14 +214,97 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              Container(
-                height: _height*0.4,
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
                 child: ListView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: 4,
+                  padding: EdgeInsets.only(top: 0.0),
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 2,
                   itemBuilder: (BuildContext context, int index) {
-                    return RestaurantsCard();
+                    return PopularRestaurants();
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      getTranslated(context, "most_pop"),
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: AppColors.darkGrey,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      getTranslated(context, "view_all"),
+                      style: TextStyle(
+                          fontSize: 13.0,
+                          color: AppColors.orange,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  height: _height * 0.25,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(top: 0.0),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 15.0),
+                        child: MostPopular(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    getTranslated(context, "recent_items"),
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: AppColors.darkGrey,
+                        fontFamily: "Metropolis",
+                        fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    getTranslated(context, "view_all"),
+                    style: TextStyle(
+                        fontSize: 13.0,
+                        color: AppColors.orange,
+                        fontFamily: "Metropolis",
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  height: _height * 0.25,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(top: 0.0),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 15.0),
+                        child: MostPopular(),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

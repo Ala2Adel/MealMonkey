@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_monkey/app_colors.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
-class RestaurantsCard extends StatelessWidget {
+class MostPopular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -11,31 +11,39 @@ class RestaurantsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            "assets/breakfast.png",
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              "assets/breakfast3.png",
+              width: 200,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 12.0),
-            child: Text(getTranslated(context, "pop_rest")),
+            child: Text(getTranslated(context, "most_pop")),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 5.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                Text(
+                  "Cafe",
+                  style: TextStyle(fontSize: 12),
+                ),
+                Text(
+                  "Western food",
+                  style: TextStyle(fontSize: 12),
+                ),
                 Icon(
                   Icons.star,
                   color: AppColors.orange,
+                  size: 15,
                 ),
                 Text(
-                  "4.9",
-                  style: TextStyle(color: AppColors.orange),
+                  "4.9 ",
+                  style: TextStyle(color: AppColors.orange, fontSize: 12),
                 ),
-                Text("(124 ratings) Cafe"),
-                Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 110),
-                  child: Text("Western food"),
-                )
               ],
             ),
           ),

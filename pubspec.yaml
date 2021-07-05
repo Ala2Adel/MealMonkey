@@ -18,7 +18,9 @@ dependencies:
   flutter_svg: ^0.21.0+1
   shared_preferences: ^2.0.5
   introduction_screen: ^2.1.0
-  sign_button: ^2.0.0
+
+  pandabar: ^0.1.1
+
 
 dev_dependencies:
   flutter_test:

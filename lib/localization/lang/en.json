@@ -33,5 +33,7 @@
   "current_loc": "Current Location",
   "search": "Search food",
   "pop_rest": "Popular Restaurants",
-  "view_all": "View all"
+  "view_all": "View all",
+  "most_pop": "Most Popular",
+  "recent_items": "Recent items"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:meal_monkey/Screens/panda.dart';
 import 'Screens/splash_screen.dart';
 import 'localization/language_constants.dart';
 import 'localization/localization.dart';
@@ -58,7 +59,7 @@ class _MyAppState extends State<MyApp> {
         return supportedLocales.first;
       },
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: PandaBar2(),
     );
   }
 }
