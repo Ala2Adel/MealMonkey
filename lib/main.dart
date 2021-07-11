@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meal_monkey/Screens/panda.dart';
+import 'Screens/bottomNav.dart';
 import 'Screens/splash_screen.dart';
 import 'localization/language_constants.dart';
 import 'localization/localization.dart';
