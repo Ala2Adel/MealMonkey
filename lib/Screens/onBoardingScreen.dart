@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:meal_monkey/Screens/bottomNav.dart';
 import 'package:meal_monkey/app_colors.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
@@ -131,7 +132,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => BottomNav()));
                       }
 
                       _pageController.nextPage(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:meal_monkey/Screens/panda.dart';
-import 'Screens/bottomNav.dart';
 import 'Screens/splash_screen.dart';
 import 'localization/language_constants.dart';
 import 'localization/localization.dart';
@@ -36,8 +34,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-    //     statusBarColor: AppColors.transparent));
     return MaterialApp(
       locale: _locale,
       supportedLocales: [
@@ -60,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         return supportedLocales.first;
       },
       debugShowCheckedModeBanner: false,
-      home: PandaBar2(),
+      home: SplashScreen(),
     );
   }
 }

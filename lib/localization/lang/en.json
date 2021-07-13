@@ -35,5 +35,9 @@
   "pop_rest": "Popular Restaurants",
   "view_all": "View all",
   "most_pop": "Most Popular",
-  "recent_items": "Recent items"
+  "recent_items": "Recent items",
+  "menu": "Menu",
+  "offers": "Offers",
+  "profile": "profile",
+  "more": "More"
 }

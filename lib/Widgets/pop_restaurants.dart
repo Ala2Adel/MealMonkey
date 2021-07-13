@@ -21,7 +21,7 @@ class PopularRestaurants extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(
                   Icons.star,
@@ -34,7 +34,7 @@ class PopularRestaurants extends StatelessWidget {
                 ),
                 Text("(124 ratings)  Cafe"),
                 Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 100),
+                  padding: const EdgeInsetsDirectional.only(start: 80),
                   child: Text("Western food"),
                 )
               ],

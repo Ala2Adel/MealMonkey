@@ -1,202 +1,226 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meal_monkey/Screens/home_page.dart';
+import 'package:meal_monkey/Screens/menu_page.dart';
+import 'package:meal_monkey/Screens/resetPassword_page.dart';
+import 'package:meal_monkey/Screens/signUp_page.dart';
+import 'package:meal_monkey/Screens/welcome_page.dart';
+import 'package:meal_monkey/localization/language_constants.dart';
+import '../app_colors.dart';
 
-class BottomNavBarV2 extends StatefulWidget {
+class BottomNav extends StatefulWidget {
   @override
-  _BottomNavBarV2State createState() => _BottomNavBarV2State();
+  _BottomNavState createState() => _BottomNavState();
 }
 
-class _BottomNavBarV2State extends State<BottomNavBarV2> {
-  int currentIndex = 0;
+class _BottomNavState extends State<BottomNav> {
+  // Properties & Variables needed
 
-  setBottomBarIndex(index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
+  int currentTab = 0; // to keep track of active tab index
+  final PageStorageBucket bucket = PageStorageBucket();
+  Widget currentScreen = HomePage(); // Our first view in viewport
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      //
-      // bottomNavigationBar: BottomNavigationBar(
-      //     items: const <BottomNavigationBarItem>[
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.home),
-      //           title: Text('Home'),
-      //           backgroundColor: Colors.green
-      //       ),
-      //       BottomNavigationBarItem(
-      //           icon: Icon(Icons.search),
-      //           title: Text('Search'),
-      //           backgroundColor: Colors.yellow
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.person),
-      //         title: Text('Profile'),
-      //         backgroundColor: Colors.blue,
-      //       ),
-      //     ],
-      //     type: BottomNavigationBarType.shifting,
-      //     currentIndex: currentIndex,
-      //     selectedItemColor: Colors.black,
-      //     iconSize: 40,
-      //     onTap: setBottomBarIndex,
-      //     elevation: 5
-      // ),
-
-// backgroundColor: Colors.white.withAlpha(55),
-      // body:
-      // Stack(
-      //   children: [
-      //     Positioned(
-      //       bottom: 0,
-      //       left: 0,
-      //       child: Container(
-      //         width: size.width,
-      //         height: 80,
-      //         child: Stack(
-      //           overflow: Overflow.visible,
-      //           children: [
-      //             CustomPaint(
-      //               size: Size(size.width, 80),
-      //               painter: BNBCustomPainter(),
-      //             ),
-      //             Center(
-      //               heightFactor: 0.6,
-      //               child: FloatingActionButton(
-      //                   backgroundColor: Colors.orange,
-      //                   child: Icon(Icons.shopping_basket),
-      //                   elevation: 0.1,
-      //                   onPressed: () {
-      //
-      //                   }),
-      //             ),
-      //             Container(
-      //               width: size.width,
-      //               height: 80,
-      //               child: Row(
-      //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //                 children: [
-      //                   IconButton(
-      //                     icon: Icon(
-      //                       Icons.home,
-      //                       color: currentIndex == 0
-      //                           ? Colors.orange
-      //                           : Colors.grey.shade400,
-      //                     ),
-      //                     onPressed: () {
-      //                       setBottomBarIndex(0);
-      //                     },
-      //                     splashColor: Colors.white,
-      //                   ),
-      //                   IconButton(
-      //                       icon: Icon(
-      //                         Icons.restaurant_menu,
-      //                         color: currentIndex == 1
-      //                             ? Colors.orange
-      //                             : Colors.grey.shade400,
-      //                       ),
-      //                       onPressed: () {
-      //                         setBottomBarIndex(1);
-      //                       }),
-      //                   Container(
-      //                     width: size.width * 0.20,
-      //                   ),
-      //                   IconButton(
-      //                       icon: Icon(
-      //                         Icons.bookmark,
-      //                         color: currentIndex == 2
-      //                             ? Colors.orange
-      //                             : Colors.grey.shade400,
-      //                       ),
-      //                       onPressed: () {
-      //                         setBottomBarIndex(2);
-      //                       }),
-      //                   IconButton(
-      //                       icon: Icon(
-      //                         Icons.notifications,
-      //                         color: currentIndex == 3
-      //                             ? Colors.orange
-      //                             : Colors.grey.shade400,
-      //                       ),
-      //                       onPressed: () {
-      //                         setBottomBarIndex(3);
-      //                       }),
-      //                 ],
-      //               ),
-      //             )
-      //           ],
-      //         ),
-      //       ),
-      //     )
-      //   ],
-      // ),
-      backgroundColor: Colors.white.withAlpha(55),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.home,
-          size: 40,
-        ),
-        elevation: 7.0,
+      body: PageStorage(
+        child: currentScreen,
+        bucket: bucket,
       ),
-      bottomNavigationBar: BottomAppBar(
-        clipBehavior: Clip.hardEdge,
-        notchMargin: 5,
-
-        shape: CircularNotchedRectangle(),
-        child: Wrap(
-          children: [
-            BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                currentIndex: currentIndex,
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.menu), label: 'Menu'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.local_offer), label: 'Offers'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.account_circle), label: 'Profile'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.more_horiz_rounded), label: 'More'),
-                ],
-                selectedItemColor: Colors.black,
-                iconSize: 25,
-                onTap: setBottomBarIndex,
-                elevation: 4),
+      floatingActionButton: Container(
+        height: 80,
+        width: 80,
+        child: FloatingActionButton(
+          backgroundColor: currentTab == 0 ? AppColors.orange : AppColors.grey,
+          elevation: 10,
+          child: Icon(
+            Icons.home_rounded,
+            size: 45,
+          ),
+          onPressed: () {
+            setState(() {
+              currentScreen =
+                  HomePage(); // if user taps on this dashboard tab will be active
+              currentTab = 0;
+            });
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.grey.withOpacity(0.3),
+              spreadRadius: 15,
+              blurRadius: 15,
+              // offset: Offset(0, 20), // changes position of shadow
+            ),
           ],
+        ),
+        child: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          notchMargin: 15,
+          child: Container(
+            height: 80,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    MaterialButton(
+                      minWidth: 50,
+                      onPressed: () {
+                        setState(() {
+                          currentScreen =
+                              MenuPage(); // if user taps on this dashboard tab will be active
+                          currentTab = 1;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.dashboard,
+                            color: currentTab == 1
+                                ? AppColors.orange
+                                : AppColors.grey,
+                          ),
+                          Text(
+                            getTranslated(context, "menu"),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: "Metropolis",
+                              // fontWeight: FontWeight.w400,
+                              color: currentTab == 1
+                                  ? AppColors.orange
+                                  : AppColors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      minWidth: 50,
+                      onPressed: () {
+                        setState(() {
+                          currentScreen =
+                              ResetPasswordPage(); // if user taps on this dashboard tab will be active
+                          currentTab = 2;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                              child: SvgPicture.asset(
+                            "assets/offers.svg",
+                            height: 20,
+                            width: 20,
+                            color: currentTab == 2
+                                ? AppColors.orange
+                                : AppColors.grey,
+                          )),
+                          Text(
+                            getTranslated(context, "offers"),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: "Metropolis",
+                              fontWeight: FontWeight.w400,
+                              color: currentTab == 2
+                                  ? AppColors.orange
+                                  : AppColors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+
+                // Right Tab bar icons
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    MaterialButton(
+                      minWidth: 50,
+                      onPressed: () {
+                        setState(() {
+                          currentScreen =
+                              WelcomePage(); // if user taps on this dashboard tab will be active
+                          currentTab = 3;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                              child: SvgPicture.asset(
+                            "assets/profile.svg",
+                            height: 20,
+                            width: 20,
+                            color: currentTab == 3
+                                ? AppColors.orange
+                                : AppColors.grey,
+                          )),
+                          Text(
+                            getTranslated(context, "profile"),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: "Metropolis",
+                              fontWeight: FontWeight.w400,
+                              color: currentTab == 3
+                                  ? AppColors.orange
+                                  : AppColors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      minWidth: 50,
+                      onPressed: () {
+                        setState(() {
+                          currentScreen =
+                              WelcomePage(); // if user taps on this dashboard tab will be active
+                          currentTab = 4;
+                        });
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                              child: SvgPicture.asset(
+                            "assets/more.svg",
+                            height: 20,
+                            width: 20,
+                            color: currentTab == 4
+                                ? AppColors.orange
+                                : AppColors.grey,
+                          )),
+                          Text(
+                            getTranslated(context, "more"),
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: "Metropolis",
+                              color: currentTab == 4
+                                  ? AppColors.orange
+                                  : AppColors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
-  }
-}
-
-class BNBCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = new Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-
-    Path path = Path();
-    path.moveTo(0, 20); // Start
-    path.quadraticBezierTo(size.width * 0.20, 0, size.width * 0.35, 0);
-    path.quadraticBezierTo(size.width * 0.40, 0, size.width * 0.40, 20);
-    path.arcToPoint(Offset(size.width * 0.60, 20),
-        radius: Radius.circular(20.0), clockwise: false);
-    path.quadraticBezierTo(size.width * 0.60, 0, size.width * 0.65, 0);
-    path.quadraticBezierTo(size.width * 0.80, 0, size.width, 20);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.lineTo(0, 20);
-    canvas.drawShadow(path, Colors.black, 5, true);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
   }
 }
