@@ -6,7 +6,7 @@ import 'package:meal_monkey/Widgets/most_popular.dart';
 import 'package:meal_monkey/Widgets/pop_restaurants.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
-import '../app_colors.dart';
+import '../Utilities/app_colors.dart';
 
 class HomePage extends StatefulWidget {
   @override

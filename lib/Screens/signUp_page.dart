@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:meal_monkey/Screens/login_page.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
-import '../app_colors.dart';
+import '../Utilities/app_colors.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

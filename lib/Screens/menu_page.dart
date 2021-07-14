@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:meal_monkey/Widgets/menu_items.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
-import '../app_colors.dart';
+import '../Utilities/app_colors.dart';
 
 class MenuPage extends StatefulWidget {
   @override
@@ -83,7 +84,7 @@ class _MenuPageState extends State<MenuPage> {
             children: [
               PositionedDirectional(
                   start: 0,
-                  top: 20,
+                  top: 15,
                   child: Container(
                     decoration: BoxDecoration(
                         color: AppColors.orange,
@@ -91,45 +92,25 @@ class _MenuPageState extends State<MenuPage> {
                             topRight: Radius.circular(38),
                             bottomRight: Radius.circular(38))),
                     width: _width * 0.27,
-                    height: _height * 0.57,
+                    height: _height * 0.58,
                   )),
-              PositionedDirectional(
-                  start: 30,
-                  top: 30,
-                  end: 10,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(38),
-                              topRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(38),
-                              bottomRight: Radius.circular(20))),
-                      width: _width * 0.06,
-                      height: _height * 0.12,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text("Food",
-                              style: TextStyle(
-                                  fontFamily: "Metropolis",
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 22,
-                                  color: AppColors.darkGrey)),
-                          Text("120 items",
-                              style: TextStyle(
-                                  fontFamily: "Metropolis",
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 11,
-                                  color: AppColors.lightGrey))
-                        ],
-                      )
-                      //CircleAvatar(backgroundColor: AppColors.lightGrey, radius: 15,),
-                      ))
+              // MenuItems()
+
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: 3,
+                // shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return MenuItems();
+                },
+              ),
+
             ],
           ),
-        )
+        ),
+
+
+
       ],
     )));
   }

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:meal_monkey/Screens/bottomNav.dart';
-import 'package:meal_monkey/app_colors.dart';
+import 'file:///E:/Alaa%20Alaraby/Meal_Monkey/lib/Utilities/app_colors.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
 import 'home_page.dart';

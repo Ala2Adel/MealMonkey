@@ -7,7 +7,7 @@ import 'package:meal_monkey/Screens/resetPassword_page.dart';
 import 'package:meal_monkey/Screens/signUp_page.dart';
 import 'package:meal_monkey/Screens/welcome_page.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
-import '../app_colors.dart';
+import '../Utilities/app_colors.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -52,7 +52,7 @@ class _BottomNavState extends State<BottomNav> {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: AppColors.grey.withOpacity(0.3),
+              color: AppColors.grey.withOpacity(0.2),
               spreadRadius: 15,
               blurRadius: 15,
               // offset: Offset(0, 20), // changes position of shadow
