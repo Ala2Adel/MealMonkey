@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meal_monkey/Screens/home_page.dart';
 import 'package:meal_monkey/Screens/menu_page.dart';
 import 'package:meal_monkey/Screens/resetPassword_page.dart';
-import 'package:meal_monkey/Screens/signUp_page.dart';
 import 'package:meal_monkey/Screens/welcome_page.dart';
+import 'package:meal_monkey/Widgets/custom_Navigator.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 import '../Utilities/app_colors.dart';
 
@@ -15,24 +15,48 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  // Properties & Variables needed
+  List<Widget> _children = [
+    MenuPage(),
+    HomePage(),
+    HomePage(),
+    ResetPasswordPage(),
+    WelcomePage()
+  ];
 
-  int currentTab = 0; // to keep track of active tab index
+  GlobalKey<NavigatorState> customScaffoldKey = GlobalKey();
+  int _currentIndex = 2; // to keep track of active tab index
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = HomePage(); // Our first view in viewport
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageStorage(
-        child: currentScreen,
-        bucket: bucket,
-      ),
+      body: CustomNavigator(
+          navigatorKey: customScaffoldKey,
+          pageRoute: PageRoutes.materialPageRoute,
+          home: Builder(
+            builder: (context) {
+              return _children[_currentIndex];
+            },
+          )
+          ),
+
+
+      // bottomNavigationBar: BottomAppBar(
+      //   notchMargin: 15,
+      //   color: AppColors.white,
+      //   shape: CircularNotchedRectangle(),
+      //   child: Container(
+      //     height: 60,
+      //   ),
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         height: 80,
         width: 80,
         child: FloatingActionButton(
-          backgroundColor: currentTab == 0 ? AppColors.orange : AppColors.grey,
+          backgroundColor:
+          _currentIndex == 2 ? AppColors.orange : AppColors.grey,
           elevation: 10,
           child: Icon(
             Icons.home_rounded,
@@ -40,187 +64,75 @@ class _BottomNavState extends State<BottomNav> {
           ),
           onPressed: () {
             setState(() {
-              currentScreen =
-                  HomePage(); // if user taps on this dashboard tab will be active
-              currentTab = 0;
+              // if user taps on this dashboard tab will be active
+              _currentIndex = 2;
             });
           },
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.grey.withOpacity(0.2),
-              spreadRadius: 15,
-              blurRadius: 15,
-              // offset: Offset(0, 20), // changes position of shadow
+
+      bottomSheet: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: AppColors.grey,
+        showSelectedLabels: true,
+        selectedItemColor: AppColors.orange,
+        onTap: _onItemTapped,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.dashboard,
+              size: 22,
+              color: _currentIndex == 0 ? AppColors.orange : AppColors.grey,
             ),
-          ],
-        ),
-        child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: 15,
-          child: Container(
-            height: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            label: getTranslated(context, 'menu'),
+          ),
+          BottomNavigationBarItem(
+            label: getTranslated(context, 'offers'),
+            icon: Stack(
               children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    MaterialButton(
-                      minWidth: 50,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen =
-                              MenuPage(); // if user taps on this dashboard tab will be active
-                          currentTab = 1;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.dashboard,
-                            color: currentTab == 1
-                                ? AppColors.orange
-                                : AppColors.grey,
-                          ),
-                          Text(
-                            getTranslated(context, "menu"),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: "Metropolis",
-                              // fontWeight: FontWeight.w400,
-                              color: currentTab == 1
-                                  ? AppColors.orange
-                                  : AppColors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MaterialButton(
-                      minWidth: 50,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen =
-                              ResetPasswordPage(); // if user taps on this dashboard tab will be active
-                          currentTab = 2;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                              child: SvgPicture.asset(
-                            "assets/offers.svg",
-                            height: 20,
-                            width: 20,
-                            color: currentTab == 2
-                                ? AppColors.orange
-                                : AppColors.grey,
-                          )),
-                          Text(
-                            getTranslated(context, "offers"),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: "Metropolis",
-                              fontWeight: FontWeight.w400,
-                              color: currentTab == 2
-                                  ? AppColors.orange
-                                  : AppColors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                SvgPicture.asset(
+                  "assets/offers.svg",
+                  height: 22,
+                  color: _currentIndex == 1 ? AppColors.orange : AppColors.grey,
                 ),
-
-                // Right Tab bar icons
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    MaterialButton(
-                      minWidth: 50,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen =
-                              WelcomePage(); // if user taps on this dashboard tab will be active
-                          currentTab = 3;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                              child: SvgPicture.asset(
-                            "assets/profile.svg",
-                            height: 20,
-                            width: 20,
-                            color: currentTab == 3
-                                ? AppColors.orange
-                                : AppColors.grey,
-                          )),
-                          Text(
-                            getTranslated(context, "profile"),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: "Metropolis",
-                              fontWeight: FontWeight.w400,
-                              color: currentTab == 3
-                                  ? AppColors.orange
-                                  : AppColors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    MaterialButton(
-                      minWidth: 50,
-                      onPressed: () {
-                        setState(() {
-                          currentScreen =
-                              WelcomePage(); // if user taps on this dashboard tab will be active
-                          currentTab = 4;
-                        });
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                              child: SvgPicture.asset(
-                            "assets/more.svg",
-                            height: 20,
-                            width: 20,
-                            color: currentTab == 4
-                                ? AppColors.orange
-                                : AppColors.grey,
-                          )),
-                          Text(
-                            getTranslated(context, "more"),
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: "Metropolis",
-                              color: currentTab == 4
-                                  ? AppColors.orange
-                                  : AppColors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                )
               ],
             ),
           ),
-        ),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                "assets/more.svg",
+                height: 0,
+                color: _currentIndex == 2 ? AppColors.orange : AppColors.grey,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/profile.svg",
+              height: 22,
+              color: _currentIndex == 3 ? AppColors.orange : AppColors.grey,
+            ),
+            label: getTranslated(context, 'profile'),
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/more.svg",
+              height: 22,
+              color: _currentIndex == 4 ? AppColors.orange : AppColors.grey,
+            ),
+            label: getTranslated(context, 'more'),
+          ),
+        ],
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    customScaffoldKey.currentState.maybePop();
+    setState(() {
+      _currentIndex = index;
+      print("selectedIndex is $_currentIndex");
+    });
   }
 }

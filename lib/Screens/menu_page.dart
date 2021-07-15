@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:meal_monkey/Screens/DesertsPage.dart';
 import 'package:meal_monkey/Widgets/menu_items.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
-
 import '../Utilities/app_colors.dart';
 
 class MenuPage extends StatefulWidget {
@@ -79,7 +79,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
         Container(
-          height: _height * 0.6,
+          height: _height * 0.8,
           child: Stack(
             children: [
               PositionedDirectional(
@@ -91,26 +91,29 @@ class _MenuPageState extends State<MenuPage> {
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(38),
                             bottomRight: Radius.circular(38))),
-                    width: _width * 0.27,
-                    height: _height * 0.58,
+                    width: _width * 0.28,
+                    height: _height * 0.65,
                   )),
-              // MenuItems()
-
               ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: 3,
-                // shrinkWrap: true,
+                itemCount: 4,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return MenuItems();
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => DesertsPage(),
+                          ),
+                        );
+                      },
+                      child: MenuItems());
                 },
               ),
-
             ],
           ),
         ),
-
-
-
       ],
     )));
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meal_monkey/Utilities/app_colors.dart';
@@ -22,19 +21,17 @@ class _MenuItemsState extends State<MenuItems> {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
     return Container(
-      height: _height*0.15,
+      height: _height*0.14,
       child: Stack(
         children: [
           PositionedDirectional(
             start: 50,
-             // top: 30,
-            //end: 25,
             child: Container(
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: AppColors.grey.withOpacity(0.3),
-                        spreadRadius: 8,
+                        spreadRadius: 10,
                         blurRadius: 10,
                         // offset: Offset(0, 20), // changes position of shadow
                       ),
@@ -53,7 +50,7 @@ class _MenuItemsState extends State<MenuItems> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Food",
+                      Text(_menuNames[1],
                           style: TextStyle(
                               fontFamily: "Cabin",
                               fontWeight: FontWeight.w700,

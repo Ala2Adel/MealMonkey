@@ -4,9 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meal_monkey/Screens/home_page.dart';
 import 'package:meal_monkey/Screens/welcome_page.dart';
-import 'file:///E:/Alaa%20Alaraby/Meal_Monkey/lib/Utilities/app_colors.dart';
+import 'package:meal_monkey/Utilities/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
