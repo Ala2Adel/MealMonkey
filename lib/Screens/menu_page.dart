@@ -46,7 +46,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Container(
             height: _height * 0.06,
             decoration: BoxDecoration(
@@ -78,42 +78,36 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
         ),
+
         Container(
-          height: _height * 0.8,
-          child: Stack(
-            children: [
-              PositionedDirectional(
-                  start: 0,
-                  top: 15,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: AppColors.orange,
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(38),
-                            bottomRight: Radius.circular(38))),
-                    width: _width * 0.28,
-                    height: _height * 0.65,
-                  )),
-              ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: 4,
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => DesertsPage(),
-                          ),
-                        );
-                      },
-                      child: MenuItems());
+            height: _height * 0.85,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => DesertsPage(),
+                    ),
+                  );
                 },
-              ),
-            ],
-          ),
-        ),
+                child: MenuItems())),
+
+        // Container(
+        //   height: _height * 0.8,
+        //   child: Stack(children: [
+        //     PositionedDirectional(
+        //         start: 0,
+        //         top: 15,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //               color: AppColors.orange,
+        //               borderRadius: BorderRadius.only(
+        //                   topRight: Radius.circular(38),
+        //                   bottomRight: Radius.circular(38))),
+        //           width: _width * 0.28,
+        //           height: _height * 0.65,
+        //         )),
+        //   ]),
+        // )
       ],
     )));
   }

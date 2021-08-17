@@ -17,7 +17,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   List<Widget> _children = [
     MenuPage(),
-    HomePage(),
+    WelcomePage(),
     HomePage(),
     ResetPasswordPage(),
     WelcomePage()
@@ -26,7 +26,6 @@ class _BottomNavState extends State<BottomNav> {
   GlobalKey<NavigatorState> customScaffoldKey = GlobalKey();
   int _currentIndex = 2; // to keep track of active tab index
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomePage(); // Our first view in viewport
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +37,7 @@ class _BottomNavState extends State<BottomNav> {
             builder: (context) {
               return _children[_currentIndex];
             },
-          )
-          ),
-
+          )),
 
       // bottomNavigationBar: BottomAppBar(
       //   notchMargin: 15,
@@ -50,17 +47,18 @@ class _BottomNavState extends State<BottomNav> {
       //     height: 60,
       //   ),
       // ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: Container(
         height: 80,
         width: 80,
         child: FloatingActionButton(
           backgroundColor:
-          _currentIndex == 2 ? AppColors.orange : AppColors.grey,
+              _currentIndex == 2 ? AppColors.orange : AppColors.grey,
           elevation: 10,
           child: Icon(
             Icons.home_rounded,
-            size: 45,
+            size: 50,
           ),
           onPressed: () {
             setState(() {
@@ -102,9 +100,10 @@ class _BottomNavState extends State<BottomNav> {
           ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                "assets/more.svg",
-                height: 0,
-                color: _currentIndex == 2 ? AppColors.orange : AppColors.grey,
+                "assets/home.svg",
+                height: 20,
+                color:  _currentIndex == 2 ? AppColors.orange : AppColors.grey,
+
               ),
               label: ""),
           BottomNavigationBarItem(

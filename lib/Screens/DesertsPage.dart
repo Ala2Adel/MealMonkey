@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meal_monkey/Utilities/app_colors.dart';
-import 'package:meal_monkey/Widgets/pop_restaurants.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
 class DesertsPage extends StatefulWidget {
@@ -77,13 +76,76 @@ class _DesertsPageState extends State<DesertsPage> {
       ),
       ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: 3,
+        itemCount: 4,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
+        padding: EdgeInsets.only(top: 2.0, bottom: 100),
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8),
-            child: Image.asset("assets/western.png"),
+            child: Container(
+              height: _height * 0.25,
+              child: Stack(children: [
+                PositionedDirectional(
+                    end: 0,
+                    start: 0,
+
+                    child: Image.asset(
+                      "assets/apple_pie.png",
+                    )),
+                PositionedDirectional(
+                    start: 5,
+                    top: 140,
+                    child: Column(
+                      children: [
+                        Text(getTranslated(context, "pop_rest"),
+                            style: TextStyle(
+                                color: AppColors.white,
+                                fontFamily: "Metropolis",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16)),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                              start: 5, top: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: AppColors.orange,
+                                size: 20,
+                              ),
+                              Text(
+                                "4.9 ",
+                                style: TextStyle(
+                                    color: AppColors.orange,
+                                    fontFamily: "Metropolis",
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 12),
+                              ),
+                              Text("(124 ratings)",
+                                  style: TextStyle(
+                                      color: AppColors.white,
+                                      fontFamily: "Metropolis",
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 12)),
+                              Padding(
+                                padding:
+                                    const EdgeInsetsDirectional.only(start: 5),
+                                child: Text("desserts",
+                                    style: TextStyle(
+                                        color: AppColors.white,
+                                        fontFamily: "Metropolis",
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 12)),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ))
+              ]),
+            ),
           );
         },
       ),
