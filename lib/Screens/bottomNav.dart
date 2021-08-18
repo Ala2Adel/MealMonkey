@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meal_monkey/Screens/Details_page.dart';
 import 'package:meal_monkey/Screens/home_page.dart';
 import 'package:meal_monkey/Screens/menu_page.dart';
+import 'package:meal_monkey/Screens/offers_page.dart';
 import 'package:meal_monkey/Screens/resetPassword_page.dart';
 import 'package:meal_monkey/Screens/welcome_page.dart';
 import 'package:meal_monkey/Widgets/custom_Navigator.dart';
@@ -17,7 +19,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   List<Widget> _children = [
     MenuPage(),
-    WelcomePage(),
+    DetailsPage(),
     HomePage(),
     ResetPasswordPage(),
     WelcomePage()
@@ -25,6 +27,7 @@ class _BottomNavState extends State<BottomNav> {
 
   GlobalKey<NavigatorState> customScaffoldKey = GlobalKey();
   int _currentIndex = 2; // to keep track of active tab index
+
   final PageStorageBucket bucket = PageStorageBucket();
 
   @override
@@ -38,17 +41,7 @@ class _BottomNavState extends State<BottomNav> {
               return _children[_currentIndex];
             },
           )),
-
-      // bottomNavigationBar: BottomAppBar(
-      //   notchMargin: 15,
-      //   color: AppColors.white,
-      //   shape: CircularNotchedRectangle(),
-      //   child: Container(
-      //     height: 60,
-      //   ),
-      // ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         height: 80,
         width: 80,
@@ -64,11 +57,11 @@ class _BottomNavState extends State<BottomNav> {
             setState(() {
               // if user taps on this dashboard tab will be active
               _currentIndex = 2;
+              _onItemTapped(_currentIndex);
             });
           },
         ),
       ),
-
       bottomSheet: BottomNavigationBar(
         currentIndex: _currentIndex,
         showUnselectedLabels: true,
@@ -101,9 +94,7 @@ class _BottomNavState extends State<BottomNav> {
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 "assets/home.svg",
-                height: 20,
-                color:  _currentIndex == 2 ? AppColors.orange : AppColors.grey,
-
+                height: 0,
               ),
               label: ""),
           BottomNavigationBarItem(

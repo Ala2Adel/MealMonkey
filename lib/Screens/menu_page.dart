@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meal_monkey/Screens/DesertsPage.dart';
+import 'package:meal_monkey/Screens/Desserts_page.dart';
 import 'package:meal_monkey/Widgets/menu_items.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 import '../Utilities/app_colors.dart';
@@ -55,7 +55,6 @@ class _MenuPageState extends State<MenuPage> {
             child: Padding(
               padding: const EdgeInsetsDirectional.only(start: 20),
               child: Row(
-                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
                     "assets/search.svg",
@@ -78,36 +77,36 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
         ),
-
         Container(
-            height: _height * 0.85,
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => DesertsPage(),
-                    ),
-                  );
-                },
-                child: MenuItems())),
-
-        // Container(
-        //   height: _height * 0.8,
-        //   child: Stack(children: [
-        //     PositionedDirectional(
-        //         start: 0,
-        //         top: 15,
-        //         child: Container(
-        //           decoration: BoxDecoration(
-        //               color: AppColors.orange,
-        //               borderRadius: BorderRadius.only(
-        //                   topRight: Radius.circular(38),
-        //                   bottomRight: Radius.circular(38))),
-        //           width: _width * 0.28,
-        //           height: _height * 0.65,
-        //         )),
-        //   ]),
-        // )
+          height: _height*0.9,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: AppColors.orange,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(38),
+                          bottomRight: Radius.circular(38))),
+                  width: _width * 0.26,
+                  height: _height * 0.78,
+                ),
+              ),
+              Container(
+                  height: _height * 0.8,
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => DesertsPage(),
+                          ),
+                        );
+                      },
+                      child: MenuItems())),
+            ],
+          ),
+        ),
       ],
     )));
   }
