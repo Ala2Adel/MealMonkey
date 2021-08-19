@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meal_monkey/Screens/Details_page.dart';
 import 'package:meal_monkey/Screens/home_page.dart';
 import 'package:meal_monkey/Screens/menu_page.dart';
-import 'package:meal_monkey/Screens/offers_page.dart';
 import 'package:meal_monkey/Screens/resetPassword_page.dart';
 import 'package:meal_monkey/Screens/welcome_page.dart';
 import 'package:meal_monkey/Widgets/custom_Navigator.dart';
