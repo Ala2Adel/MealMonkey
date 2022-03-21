@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meal_monkey/app_colors.dart';
-import 'home_page.dart';
-
+import 'package:meal_monkey/Screens/welcome_page.dart';
+import 'package:meal_monkey/Utilities/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,18 +16,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     // getUser();
+    // if (mounted) setState(() {
     Timer(
         Duration(seconds: 4),
         () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (BuildContext context) => HomePage(),
+                builder: (BuildContext context) => WelcomePage(),
               ),
             ));
     super.didChangeDependencies();
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
+        .copyWith(statusBarColor: AppColors.transparent));
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
 
@@ -40,10 +44,10 @@ class _SplashScreenState extends State<SplashScreen> {
         )),
         PositionedDirectional(
           top: 0.38 * _height,
-          start: 0.4 * _width,
+          start: 0.37 * _width,
           child: SvgPicture.asset(
             "assets/Monkey_face.svg",
-            height: _height * 0.13,
+            height: _height * 0.14,
             fit: BoxFit.fill,
           ),
         ),
@@ -65,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
             )),
         PositionedDirectional(
             top: 0.59 * _height,
-            start: 0.4 * _width,
+            start: 0.38 * _width,
             child: Text(
               "Food delivery".toUpperCase(),
               style: TextStyle(

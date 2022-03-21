@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meal_monkey/Widgets/most_popular.dart';
+import 'package:meal_monkey/Widgets/pop_restaurants.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
-import '../app_colors.dart';
+import '../Utilities/app_colors.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,102 +14,303 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String _selectedLocation;
+
+  var _locations = ['Cairo', 'Alexandria', 'Giza'];
+  List _images = [
+    "assets/offers.png",
+    "assets/pizza.png",
+    "assets/western.png",
+    "assets/sri_lanka.png",
+    "assets/indian.png"
+  ];
+  List _labels = ["Offers", "Italian", "Western", "Sri Lankan", "Indian"];
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
+        .copyWith(statusBarColor: AppColors.transparent));
+
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-        body: Stack(children: [
-      PositionedDirectional(
-        width: _width,
-        height: _height * 0.53,
-        child: SvgPicture.asset(
-          'assets/Shaped_subtraction.svg',
-          fit: BoxFit.cover,
-        ),
-      ),
-//      PositionedDirectional(
-//        width: _width,
-//        height: _height * 0.59,
-//        child: SvgPicture.asset(
-//          'assets/Background_objects.svg',
-//          fit: BoxFit.cover,
-//        ),
-//      ),
-      PositionedDirectional(
-        top: 0.42 * _height,
-        start: 0.4 * _width,
-        child: SvgPicture.asset(
-          "assets/Monkey_face.svg",
-          height: _height * 0.13,
-          fit: BoxFit.fill,
-        ),
-      ),
-      PositionedDirectional(
-          top: 0.57 * _height,
-          start: 0.25 * _width,
-          child: Text(
-            "Meal",
-            style: TextStyle(
-                fontFamily: "Cabin", fontSize: 34, color: AppColors.orange),
-          )),
-      PositionedDirectional(
-          top: 0.57 * _height,
-          start: 0.45 * _width,
-          child: Text(
-            "Monkey",
-            style: TextStyle(
-                fontFamily: "Cabin", fontSize: 34, color: AppColors.darkGrey),
-          )),
-      PositionedDirectional(
-          top: 0.64 * _height,
-          start: 0.38 * _width,
-          child: Text(
-            "Food delivery".toUpperCase(),
-            style: TextStyle(
-                fontFamily: "Metropolis",
-                fontWeight: FontWeight.w300,
-                fontSize: 12,
-                color: AppColors.darkGrey),
-          )),
-      PositionedDirectional(
-          top: 0.7 * _height,
-          start: 0.1 * _width,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              getTranslated(context, "discover"),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "Metropolis",
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                  color: AppColors.darkGrey),
-            ),
-          )),
-      PositionedDirectional(
-        top: 0.79 * _height,
-        start: 0.1 * _width,
-        child: Container(
-          width: _width * 0.8,
-          height: _height * 0.07,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(28)),
-              color: AppColors.orange),
-          child: Padding(
-            padding: const EdgeInsets.only(top:15.0),
-            child: Text(
-              getTranslated(context, "login"),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: "Metropolis",
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                  color: AppColors.white),
-            ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Good Morning" + " Alaa!",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: AppColors.darkGrey,
+                        fontFamily: "Metropolis",
+                        fontWeight: FontWeight.w900),
+                  ),
+                  SvgPicture.asset(
+                    "assets/cart-shopping.svg",
+                    height: 20,
+                    color: AppColors.darkGrey,
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: Row(
+                  children: [
+                    Text(
+                      getTranslated(context, "delivery_to"),
+                      style: TextStyle(
+                          fontSize: 11.0,
+                          color: AppColors.grey,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  DropdownButton(
+                    hint: Text(
+                      getTranslated(context, "current_loc"),
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          color: AppColors.lightGrey,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w600),
+                    ),
+                    isDense: true,
+                    underline: SizedBox(),
+                    icon: Padding(
+                      padding: const EdgeInsetsDirectional.only(start: 25.0),
+                      child: SvgPicture.asset(
+                        "assets/menu_down.svg",
+                        color: AppColors.orange,
+                      ),
+                    ),
+                    iconSize: 30.0,
+                    style: TextStyle(color: AppColors.darkGrey),
+                    items: _locations.map(
+                      (String val) {
+                        return DropdownMenuItem<String>(
+                          child: Text(
+                            val,
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                color: AppColors.lightGrey,
+                                fontFamily: "Metropolis",
+                                fontWeight: FontWeight.w600),
+                          ),
+                          value: val,
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (val) {
+                      setState(
+                        () {
+                          print("$val");
+                          _selectedLocation = val;
+                        },
+                      );
+                    },
+                    value: _selectedLocation,
+                  ),
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                child: Container(
+                  height: _height * 0.06,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(28)),
+                      color: AppColors.grey.withOpacity(0.25)),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 20),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/search.svg",
+                          height: 20,
+                          color: AppColors.lightGrey,
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(start: 20),
+                          child: Text(
+                            getTranslated(context, "search"),
+                            style: TextStyle(
+                                fontFamily: "Metropolis",
+                                fontWeight: FontWeight.w300,
+                                fontSize: 14,
+                                color: AppColors.grey),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                  height: _height * 0.15,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _images.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                              end: 12, top: 10),
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: Image.asset(
+                                    _images[index],
+                                    height: 80,
+                                    width: _width * 0.26,
+                                    fit: BoxFit.fill,
+                                  )),
+                              Container(
+                                  child: Padding(
+                                      padding: const EdgeInsets.only(top: 7.0),
+                                      child: Center(
+                                        child: Text(_labels[index],
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                color: AppColors.darkGrey,
+                                                fontFamily: "Metropolis",
+                                                fontWeight: FontWeight.bold)),
+                                      )))
+                            ],
+                          ),
+                        );
+                      })),
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      getTranslated(context, "pop_rest"),
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: AppColors.darkGrey,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      getTranslated(context, "view_all"),
+                      style: TextStyle(
+                          fontSize: 13.0,
+                          color: AppColors.orange,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: ListView.builder(
+                  padding: EdgeInsets.only(top: 0.0),
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 2,
+                  itemBuilder: (BuildContext context, int index) {
+                    return PopularRestaurants();
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      getTranslated(context, "most_pop"),
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: AppColors.darkGrey,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      getTranslated(context, "view_all"),
+                      style: TextStyle(
+                          fontSize: 13.0,
+                          color: AppColors.orange,
+                          fontFamily: "Metropolis",
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  height: _height * 0.25,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(top: 0.0),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 15.0),
+                        child: MostPopular(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    getTranslated(context, "recent_items"),
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: AppColors.darkGrey,
+                        fontFamily: "Metropolis",
+                        fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    getTranslated(context, "view_all"),
+                    style: TextStyle(
+                        fontSize: 13.0,
+                        color: AppColors.orange,
+                        fontFamily: "Metropolis",
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  height: _height * 0.25,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(top: 0.0),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 15.0),
+                        child: MostPopular(),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      )
-    ]));
+      ),
+    );
   }
 }

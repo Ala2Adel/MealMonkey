@@ -17,6 +17,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.21.0+1
   shared_preferences: ^2.0.5
+  introduction_screen: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -26,24 +27,24 @@ flutter:
   uses-material-design: true
 
   assets:
-     - assets/
-     - lib/localization/lang/
+    - assets/
+    - lib/localization/lang/
 
   fonts:
-     - family: Cabin
-       fonts:
-         - asset: assets/fonts/Cabin-Bold.ttf
-           weight: 400
-     - family: Metropolis
-       fonts:
-         - asset: assets/fonts/metropolis.bold.otf
-           weight: 500
-         - asset: assets/fonts/metropolis.extra-bold.otf
-           weight: 900
-         - asset: assets/fonts/metropolis.medium.otf
-           weight: 400
-         - asset: assets/fonts/metropolis.regular.otf
-           weight: 300
-         - asset: assets/fonts/metropolis.semi-bold.otf
-           weight: 700
+    - family: Cabin
+      fonts:
+        - asset: assets/fonts/Cabin-Bold.ttf
+          weight: 400
+    - family: Metropolis
+      fonts:
+        - asset: assets/fonts/metropolis.bold.otf
+          weight: 500
+        - asset: assets/fonts/metropolis.extra-bold.otf
+          weight: 900
+        - asset: assets/fonts/metropolis.medium.otf
+          weight: 400
+        - asset: assets/fonts/metropolis.regular.otf
+          weight: 300
+        - asset: assets/fonts/metropolis.semi-bold.otf
+          weight: 700
 

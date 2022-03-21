@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'Screens/splash_screen.dart';
 import 'localization/language_constants.dart';
 import 'localization/localization.dart';
@@ -36,8 +34,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    //statusBarColor: AppColors.transparent));
     return MaterialApp(
       locale: _locale,
       supportedLocales: [
