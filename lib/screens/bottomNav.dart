@@ -8,7 +8,7 @@ import 'package:meal_monkey/Screens/resetPassword_page.dart';
 import 'package:meal_monkey/Screens/welcome_page.dart';
 import 'package:meal_monkey/Widgets/custom_Navigator.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
-import '../Utilities/app_colors.dart';
+import 'package:meal_monkey/Utilities/appColors.dart';
 
 class BottomNav extends StatefulWidget {
   @override

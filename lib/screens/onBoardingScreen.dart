@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:meal_monkey/Screens/bottomNav.dart';
-import 'package:meal_monkey/Utilities/app_colors.dart';
+import 'package:meal_monkey/Utilities/appColors.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -36,8 +36,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark
-        .copyWith(statusBarColor: AppColors.transparent));
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle.dark.copyWith(statusBarColor: AppColors.transparent));
 
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
@@ -65,6 +65,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: PageView.builder(
             itemCount: _allPages.length,
+            allowImplicitScrolling: true,
             controller: _pageController,
             onPageChanged: (int index) {
               setState(() {
@@ -87,21 +88,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 3.0),
-                                width: currentIndex == index ? 10 : 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  color: currentIndex == index
-                                      ? AppColors.orange
-                                      : AppColors.lightGrey.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                            ]);
+                        return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 3.0),
+                            width: currentIndex == index ? 10 : 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              color: currentIndex == index
+                                  ? AppColors.orange
+                                  : AppColors.lightGrey.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                          ),
+                        ]);
                       },
                     ),
                   ),
@@ -128,9 +127,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       print(index);
                       if (index == _allPages.length - 1) {
                         Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BottomNav()));
+                            context, MaterialPageRoute(builder: (context) => BottomNav()));
                       }
 
                       _pageController.nextPage(
@@ -139,14 +136,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       );
                     },
                     child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 50),
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 50),
                         child: Container(
                             width: _width * 0.92,
                             height: _height * 0.075,
                             decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(28)),
+                                borderRadius: BorderRadius.all(Radius.circular(28)),
                                 color: AppColors.orange),
                             child: Center(
                               child: Text(

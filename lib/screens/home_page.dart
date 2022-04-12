@@ -5,8 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meal_monkey/Widgets/most_popular.dart';
 import 'package:meal_monkey/Widgets/pop_restaurants.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
-
-import '../Utilities/app_colors.dart';
+import 'package:meal_monkey/Utilities/appColors.dart';
 
 class HomePage extends StatefulWidget {
   @override

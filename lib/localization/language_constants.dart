@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:meal_monkey/database/connectWithSharedPref.dart';
+import 'package:meal_monkey/Utilities/strings.dart';
 import 'package:meal_monkey/database/shared_preferences.dart';
-
 import 'localization.dart';
 
 
 Future<Locale> setLocale(String languageCode) async {
   SharedPref sharedPref = SharedPref();
-  await sharedPref.save(ConnectWithSharedPref.languageCode, languageCode);
+  await sharedPref.save(langCode, languageCode);
   return _locale(languageCode);
 }
 
@@ -16,7 +15,7 @@ Future<Locale> getLocale() async {
   String languageCode;
   try {
     languageCode =
-        await sharedPref.read(ConnectWithSharedPref.languageCode) ?? 'en';
+        await sharedPref.read(langCode) ?? 'en';
   } catch (err) {
     languageCode = 'en';
   }

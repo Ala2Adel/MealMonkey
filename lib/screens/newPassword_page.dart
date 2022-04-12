@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meal_monkey/Screens/onBoardingScreen.dart';
 import 'package:meal_monkey/localization/language_constants.dart';
-
-import '../Utilities/app_colors.dart';
+import 'package:meal_monkey/Utilities/appColors.dart';
 
 class NewPasswordPage extends StatefulWidget {
   @override
